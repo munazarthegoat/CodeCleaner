@@ -69,9 +69,9 @@ export default function Register() {
     onSuccess: () => {
       toast({
         title: "Registration successful",
-        description: "Your account has been created successfully",
+        description: "Let's customize your experience",
       });
-      navigate("/login");
+      navigate("/onboarding");
     },
     onError: (error) => {
       toast({

@@ -12,6 +12,7 @@ import AgentCreate from "@/pages/agents/create";
 import AgentDetail from "@/pages/agents/[id]";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
+import Onboarding from "@/pages/onboarding";
 
 function Router() {
   return (
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/agents/:id" component={AgentDetail} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+      <Route path="/onboarding" component={Onboarding} />
       <Route component={NotFound} />
     </Switch>
   );

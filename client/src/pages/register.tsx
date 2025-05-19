@@ -22,6 +22,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 const registerSchema = z.object({
+  companyName: z.string().min(2, "Company name must be at least 2 characters"),
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
   username: z.string().min(3, "Username must be at least 3 characters"),
   password: z.string()
     .min(8, "Password must be at least 8 characters")
@@ -43,6 +45,8 @@ export default function Register() {
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
+      companyName: "",
+      fullName: "",
       username: "",
       password: "",
       confirmPassword: "",
@@ -54,6 +58,8 @@ export default function Register() {
       const response = await apiRequest("POST", "/api/auth/register", {
         username: data.username,
         password: data.password,
+        companyName: data.companyName,
+        fullName: data.fullName,
       });
       return response.json();
     },
@@ -97,6 +103,32 @@ export default function Register() {
           <div className="bg-white shadow-md rounded-lg p-8">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="companyName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Company Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Acme Inc." {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="fullName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Full Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="John Doe" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="username"

@@ -7,11 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Plus, MessageSquare, BarChart, Settings, Zap, Users, Briefcase } from "lucide-react";
+import { Plus, MessageSquare, BarChart, Settings, Zap, Users, Briefcase, ArrowRight, Layers, Star } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import ConnectAppModal from "@/components/dashboard/ConnectAppModal";
 
 // Placeholder data for agents - this would come from the API
 const agentsData = [
@@ -93,12 +94,20 @@ export default function Dashboard() {
               <h1 className="text-3xl font-bold">Your AI Workforce</h1>
               <p className="text-gray-600 mt-1">Manage your AI agents and track their performance</p>
             </div>
-            <Link href="/agents/create">
-              <Button className="flex items-center gap-2">
-                <Plus className="h-4 w-4" />
-                Create New Agent
-              </Button>
-            </Link>
+            <div className="flex gap-3">
+              <ConnectAppModal onSuccess={() => {
+                toast({
+                  title: "App connection successful",
+                  description: "Your external application is now connected to Vetro AI."
+                });
+              }} />
+              <Link href="/agents/create">
+                <Button className="flex items-center gap-2">
+                  <Plus className="h-4 w-4" />
+                  Create New Agent
+                </Button>
+              </Link>
+            </div>
           </div>
 
           <Tabs defaultValue="agents" className="space-y-6">

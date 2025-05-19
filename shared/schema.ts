@@ -9,6 +9,12 @@ export const users = pgTable("users", {
   password: text("password").notNull(),
   email: text("email"),
   fullName: text("full_name"),
+  companyName: text("company_name"),
+  onboardingCompleted: boolean("onboarding_completed").default(false),
+  onboardingStep: integer("onboarding_step").default(1),
+  industry: text("industry"),
+  teamSize: text("team_size"),
+  aiExperienceLevel: text("ai_experience_level"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -17,6 +23,7 @@ export const insertUserSchema = createInsertSchema(users).pick({
   password: true,
   email: true,
   fullName: true,
+  companyName: true,
 });
 
 // AI Agents model

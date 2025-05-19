@@ -24,6 +24,7 @@ import Footer from "@/components/layout/Footer";
 const registerSchema = z.object({
   companyName: z.string().min(2, "Company name must be at least 2 characters"),
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
   username: z.string().min(3, "Username must be at least 3 characters"),
   password: z.string()
     .min(8, "Password must be at least 8 characters")
@@ -47,6 +48,7 @@ export default function Register() {
     defaultValues: {
       companyName: "",
       fullName: "",
+      email: "",
       username: "",
       password: "",
       confirmPassword: "",
@@ -60,6 +62,7 @@ export default function Register() {
         password: data.password,
         companyName: data.companyName,
         fullName: data.fullName,
+        email: data.email,
       });
       return response.json();
     },
@@ -124,6 +127,19 @@ export default function Register() {
                       <FormLabel>Full Name</FormLabel>
                       <FormControl>
                         <Input placeholder="John Doe" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="you@example.com" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

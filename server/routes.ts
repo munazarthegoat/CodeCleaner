@@ -3,8 +3,11 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, insertAgentSchema, insertMessageSchema, insertTaskSchema } from "@shared/schema";
 import { z } from "zod";
+import aiRoutes from "./routes/ai";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Register AI routes
+  app.use("/api/ai", aiRoutes);
   // Authentication routes
   app.post("/api/auth/register", async (req, res) => {
     try {

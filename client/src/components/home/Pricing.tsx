@@ -9,7 +9,7 @@ const pricingPlans = [
   {
     name: "Starter",
     description: "For small teams and early-stage startups",
-    price: "$49",
+    price: "$79",
     period: "/month",
     features: [
       "2 AI agents",
